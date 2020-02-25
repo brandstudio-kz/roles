@@ -7,7 +7,7 @@ trait HasRoles
 
     public function roles()
     {
-        return $this->hasMany(config('roles.role_class'), 'role_target', $this->primaryKey, 'role_id');
+        return $this->belongsToMany(config('roles.role_class'), 'role_target', 'target_id', 'role_id');
     }
 
     public function hasRole(string $key) : bool
