@@ -19,6 +19,13 @@ class RoleCrudController extends CrudController
         $this->crud->setModel(config('roles.role_class'));
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/role');
         $this->crud->setEntityNameStrings(trans_choice('brandstudio::roles.roles', 1), trans_choice('brandstudio::roles.roles', 2));
+
+        if (!config('roles.allow_create')) {
+            $this->crud->denyAccess('create');
+        }
+        if (!config('roles.allow_delete')) {
+            $this->crud->denyAccess('delete');
+        }
     }
 
     protected function setupListOperation()
@@ -34,13 +41,14 @@ class RoleCrudController extends CrudController
                 'label' => trans('brandstudio::roles.name'),
                 'type' => 'text'
             ],
-            [
-                'name' => 'key',
-                'label' => trans('brandstudio::roles.key'),
-                'type' => 'text'
-            ],
         ]);
         $this->crud->addColumns(config('roles.crud_extra_columns'));
+
+        $this->crud->addColumn([
+            'name' => 'key',
+            'label' => trans('brandstudio::roles.key'),
+            'type' => 'text'
+        ]);
     }
 
     protected function setupCreateOperation()
