@@ -24,7 +24,7 @@ class RoleMiddleware
             abort(401, trans('brandstudio::roles.unauthorized'));
         }
 
-        if (!$user->hasRole($role)) {
+        if (!$user->hasAnyRole(explode('|', $role))) {
             abort(403, trans('brandstudio::roles.permission_denied'));
         }
 

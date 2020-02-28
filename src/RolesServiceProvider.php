@@ -4,6 +4,7 @@ namespace BrandStudio\Roles;
 
 use Illuminate\Support\ServiceProvider;
 use BrandStudio\Roles\Http\Middleware\RoleMiddleware;
+use \Illuminate\Support\Facades\Blade;
 
 class RolesServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,11 @@ class RolesServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__.'/database/migrations');
             $this->publish();
         }
+
+        Blade::if('role', function($expression) {
+            $user = backpack_user() ?? request()->user();
+            return $user ? $user->hasAnyRole(explode('|', $expression)) : false;
+        });
 
     }
 
