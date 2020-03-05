@@ -25,4 +25,12 @@ trait HasRoles
         return $this->roles()->whereIn('key', $roles)->exists();
     }
 
+    public function setRole(string $key)
+    {
+        $role = config('roles.role_class')::where('key', $key)->first();
+        if ($role) {
+            $this->roles()->attach($role);
+        }
+    }
+
 }
