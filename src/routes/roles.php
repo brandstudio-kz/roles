@@ -6,4 +6,5 @@ Route::group([
     'namespace'  => 'BrandStudio\Roles\Http\Controllers',
 ], function () { // custom admin routes
     Route::crud('role', 'RoleCrudController');
+    Route::crud('permission', 'PermissionCrudController');
 });

@@ -78,6 +78,15 @@ class RoleCrudController extends CrudController
                     'class' => 'form-group col-sm-12 required',
                 ],
             ],
+            [
+                'name' => 'permissions',
+                'label' => trans_choice('brandstudio::roles.permissions',2),
+                'type' => 'checklist',
+                'entity'    => 'permissions',
+                'attribute' => 'key',
+                'model'     => config('permissions.permission_class'),
+                'pivot' => true,
+            ],
         ]);
         $this->crud->addFields(config('roles.crud_extra_fields'));
     }

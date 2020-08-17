@@ -12,6 +12,7 @@ class RolesServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/config/roles.php', 'roles');
+        $this->mergeConfigFrom(__DIR__.'/config/permissions.php', 'permissions');
 
         if ($this->app->runningInConsole()) {
             $this->publish();
@@ -48,8 +49,16 @@ class RolesServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
+            __DIR__.'/config/permissions.php' => config_path('permissions.php')
+        ], 'config');
+
+        $this->publishes([
             __DIR__.'/database/migrations/' => database_path('migrations')
         ], 'migrations');
+
+        $this->publishes([
+            __DIR__.'/database/seeds/' => database_path('seeds')
+        ], 'seeds');
 
         $this->publishes([
             __DIR__.'/resources/views/roles'      => resource_path('views/vendor/brandstudio/roles')

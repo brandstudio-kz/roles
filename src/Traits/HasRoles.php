@@ -1,9 +1,10 @@
 <?php
 
-namespace BrandStudio\Roles;
+namespace BrandStudio\Roles\Traits;
 
 trait HasRoles
 {
+    use HasPermissions;
 
     public function roles()
     {
@@ -29,7 +30,7 @@ trait HasRoles
     {
         $role = config('roles.role_class')::where('key', $key)->first();
         if ($role) {
-            $this->roles()->attach($role);
+            $this->roles()->sync($role);
         }
     }
 

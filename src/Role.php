@@ -8,7 +8,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 class Role extends Model
 {
     use CrudTrait;
-
+    use \BrandStudio\Roles\Traits\HasRoles;
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
