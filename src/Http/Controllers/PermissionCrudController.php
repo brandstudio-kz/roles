@@ -34,7 +34,7 @@ class PermissionCrudController extends CrudController
     public function setupListOperation()
     {
         $this->crud->addColumn([
-            'name' => 'name',
+            'name' => 'key',
             'label' => trans('brandstudio::roles.name'),
             'type' => 'text',
         ]);
